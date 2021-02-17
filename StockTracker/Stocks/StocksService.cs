@@ -108,13 +108,15 @@ namespace StockTracker.Stocks
 
 				foreach (Match match in matches)
 				{
-					if (wordRefsByWord.TryGetValue(match.Value, out WordReference wordRef))
+					var key = match.Value.ToUpper();
+					
+					if (wordRefsByWord.TryGetValue(key, out WordReference wordRef))
 					{
 						wordRef.Add(1, comment);
 					}
 					else
 					{
-						wordRefsByWord.Add(match.Value, new WordReference(match.Value, 1, comment));
+						wordRefsByWord.Add(key, new WordReference(key, 1, comment));
 					}
 				}
 			}
