@@ -93,7 +93,9 @@ namespace StockTracker.Stocks
 			_logger.LogInformation("Post Count: {PostCount}; Comment Count: {CommentCount}", posts.Count, comments.Count);
 
 			var wordRefsByWord = new Dictionary<string, WordReference>();
-			var regex = new Regex("[$]+[a-zA-Z]+", RegexOptions.Compiled | RegexOptions.IgnoreCase);
+			// That regex...
+			var regex = new Regex(@"(?<=[\W]{1}\${1})([a-zA-Z]{1,4})(?=[\.\!\?\s\\])|(?<=\s{1})([A-Z]{2,4})(?=[\.\!\?\s\\])", 
+				RegexOptions.Compiled);
 
 			foreach (var comment in comments)
 			{
@@ -106,15 +108,13 @@ namespace StockTracker.Stocks
 
 				foreach (Match match in matches)
 				{
-					var key = match.Value.ToUpper();
-
-					if (wordRefsByWord.TryGetValue(key, out WordReference wordRef))
+					if (wordRefsByWord.TryGetValue(match.Value, out WordReference wordRef))
 					{
 						wordRef.Add(1, comment);
 					}
 					else
 					{
-						wordRefsByWord.Add(key, new WordReference(key, 1, comment));
+						wordRefsByWord.Add(match.Value, new WordReference(match.Value, 1, comment));
 					}
 				}
 			}
