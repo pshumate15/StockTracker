@@ -30,7 +30,7 @@ namespace StockTracker.Infrastructure
 		}
 
 		protected override void OnConfiguring(DbContextOptionsBuilder options)
-			=> options.UseSqlite("Data Source=StockTracker.db");
+			=> options.UseSqlite($"Data Source={AppContext.BaseDirectory}/StockTracker.db");
 
 		protected override void OnModelCreating(ModelBuilder modelBuilder)
 		{

@@ -1,14 +1,14 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Serilog.Context;
 using StockTracker.Infrastructure;
 using StockTracker.Reddit;
 using StockTracker.Reddit.Entities;
 using StockTracker.Stocks.Entities;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text.RegularExpressions;
+using System.Threading.Tasks;
 
 namespace StockTracker.Stocks
 {
@@ -94,7 +94,7 @@ namespace StockTracker.Stocks
 
 			var wordRefsByWord = new Dictionary<string, WordReference>();
 			// That regex...
-			var regex = new Regex(@"(?<=[\W]{1}\${1})([a-zA-Z]{1,4})(?=[\.\!\?\s\\])|(?<=\s{1})([A-Z]{2,4})(?=[\.\!\?\s\\])", 
+			var regex = new Regex(@"(?<=[\W]{1}\${1})([a-zA-Z]{1,4})(?=[\.\!\?\s\\])|(?<=\s{1})([A-Z]{2,4})(?=[\.\!\?\s\\])",
 				RegexOptions.Compiled);
 
 			foreach (var comment in comments)
@@ -109,7 +109,7 @@ namespace StockTracker.Stocks
 				foreach (Match match in matches)
 				{
 					var key = match.Value.ToUpper();
-					
+
 					if (wordRefsByWord.TryGetValue(key, out WordReference wordRef))
 					{
 						wordRef.Add(1, comment);

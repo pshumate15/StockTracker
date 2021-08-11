@@ -2,12 +2,12 @@
 
 namespace StockTracker.Stocks.Entities
 {
-    public class StockReference
-    {
-        public int StockReferenceID { get; set; }
+	public class StockReference
+	{
+		public int StockReferenceID { get; set; }
 
-        public Stock Stock { get; set; }
+		public Stock Stock { get; set; }
 
-        public Comment Comment { get; set; }
-    }
+		public Comment Comment { get; set; }
+	}
 }

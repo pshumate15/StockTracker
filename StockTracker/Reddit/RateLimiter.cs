@@ -13,11 +13,11 @@ namespace StockTracker.Reddit
 	{
 		public int RequestsStarted = 0;
 		public int RequestsCompleted = 0;
-		private DateTimeOffset[] _buffer;
-		private TimeSpan _rateTimeSpan;
+		private readonly DateTimeOffset[] _buffer;
+		private readonly TimeSpan _rateTimeSpan;
 		private int _oldestIndex;
 		private int _newestIndex;
-		private SemaphoreSlim _bufferLock;
+		private readonly SemaphoreSlim _bufferLock;
 
 		public RateLimiter() : this(RedditConstants.MaxRequestsPerMinute, 60) { }
 
